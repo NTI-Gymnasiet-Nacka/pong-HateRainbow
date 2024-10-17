@@ -28,7 +28,7 @@ def main() -> None:
         sleep(0.01)
         ball.move()
 
-        # checks sides
+        # checks if ball touches the sides of the screen
 
         if ball.ycor() > 280 or ball.ycor() < -280:
             ball.bounce_y()
@@ -41,12 +41,20 @@ def main() -> None:
             ball.reset_position()
             scoreboard.right_point()
 
+        # checks if ball touches the paddles
+
         if (ball.xcor() > 360 and ball.xcor() < 370) and \
-                (ball.ycor() < right_paddle.ycor() + 50 and ball.ycor() > right_paddle.ycor() - 50):
+            (
+                ball.ycor() < right_paddle.ycor() + 50
+                and ball.ycor() > right_paddle.ycor() - 50
+        ):
             ball.bounce_x()
 
         if (ball.xcor() < -360 and ball.xcor() > -370) and \
-                (ball.ycor() < left_paddle.ycor() + 50 and ball.ycor() > left_paddle.ycor() - 50):
+            (
+                ball.ycor() < left_paddle.ycor() + 50
+                and ball.ycor() > left_paddle.ycor() - 50
+        ):
             ball.bounce_x()
 
 
