@@ -28,6 +28,8 @@ def main() -> None:
         sleep(0.01)
         ball.move()
 
+        # checks sides
+
         if ball.ycor() > 280 or ball.ycor() < -280:
             ball.bounce_y()
 
