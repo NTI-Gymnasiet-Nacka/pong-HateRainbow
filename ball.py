@@ -13,6 +13,7 @@ class Ball(Turtle):
         self.dy = -5
 
     def move(self) -> None:
+        """Move the ball"""
         self.setx(self.xcor() + self.dx)
         self.sety(self.ycor() + self.dy)
 

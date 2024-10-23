@@ -1,24 +1,31 @@
 from time import sleep
 from turtle import Screen
-
-from matplotlib.pyplot import delaxes
 from paddle import Paddle
 from ball import Ball
 from scoreboard import Scoreboard
 
+MAX_POINTS = 1  # Set the maximum points to win the game
+LEFT_PLAYER_NAME = "left player"
+RIGHT_PLAYER_NAME = "right player"
+
 
 def main() -> None:
+    sleep(1)
     screen = Screen()
     screen.title("Pong Game")
     screen.bgcolor("white")
     screen.setup(width=1000, height=600)
-    screen.tracer(0.5, delay=0.01)
+    screen.tracer(1)
 
-    max_points = 5  # Set the maximum points to win the game
     left_paddle = Paddle(position=(-400, 0), color="black")
     right_paddle = Paddle(position=(400, 0), color="black")
-    ball = Ball(color="blue", speed=0.5)
-    scoreboard = Scoreboard(color="blue", max_points=max_points)
+    ball = Ball(color="blue", speed=4)
+    scoreboard = Scoreboard(
+        color="blue",
+        max_points=MAX_POINTS,
+        left_player_name=LEFT_PLAYER_NAME,
+        right_player_name=RIGHT_PLAYER_NAME,
+    )
 
     screen.listen()
     screen.onkeypress(left_paddle.move_up, "w")
@@ -27,11 +34,11 @@ def main() -> None:
     screen.onkeypress(right_paddle.move_down, "Down")
 
     game_is_on = True
+
     while game_is_on:
         screen.update()
         ball.move()
-
-        # Check if the ball touches the top or bottom of the screen
+        # Check if the ball touches the top or bottom of the screen if so it will bounce
         if ball.ycor() > 280 or ball.ycor() < -280:
             ball.bounce_y()
 
@@ -50,12 +57,16 @@ def main() -> None:
                 game_is_on = False
 
         # Check for collision with the paddles
-        if (ball.xcor() > 360 and ball.xcor() < 370) and \
-                (ball.ycor() < right_paddle.ycor() + 50 and ball.ycor() > right_paddle.ycor() - 50):
+        if (ball.xcor() > 360 and ball.xcor() < 370) and (
+            ball.ycor() < right_paddle.ycor() + 70
+            and ball.ycor() > right_paddle.ycor() - 70
+        ):
             ball.bounce_x()
 
-        if (ball.xcor() < -360 and ball.xcor() > -370) and \
-                (ball.ycor() < left_paddle.ycor() + 50 and ball.ycor() > left_paddle.ycor() - 50):
+        if (ball.xcor() < -360 and ball.xcor() > -370) and (
+            ball.ycor() < left_paddle.ycor() + 70
+            and ball.ycor() > left_paddle.ycor() - 70
+        ):
             ball.bounce_x()
 
     screen.exitonclick()
