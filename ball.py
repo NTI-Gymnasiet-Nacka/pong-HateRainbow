@@ -3,14 +3,21 @@ from turtle import Turtle
 
 class Ball(Turtle):
     def __init__(self, color: str, speed: int) -> None:
+        """
+        Class object that creates the ball
+
+        Args:
+            color (str): choose color of the ball
+            speed (int): choose the speed that the ball goes
+        """
         super().__init__()
         self.color(color)
         self.shape("circle")
         self.speed(speed)
         self.penup()
+        self.dx = speed
+        self.dy = -speed
         self.goto(0, 0)
-        self.dx = 5
-        self.dy = -5
 
     def move(self) -> None:
         """Move the ball"""
@@ -24,5 +31,6 @@ class Ball(Turtle):
         self.dx *= -1
 
     def reset_position(self) -> None:
+        """when the game restart so will the ball be in the first position"""
         self.goto(0, 0)
         self.bounce_x()

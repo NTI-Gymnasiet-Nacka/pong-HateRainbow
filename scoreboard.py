@@ -16,7 +16,8 @@ class Scoreboard(Turtle):
         Args:
             color (str): Color of the scoreboard
             max_points (int): how many points per game
-            left_player
+            left_player_name (str): left paddle player name
+            right_player_name (str): right paddle player name
         """
         super().__init__()
         self.color(color)
@@ -50,7 +51,10 @@ class Scoreboard(Turtle):
         self.update_scoreboard()
 
     def check_winner(self) -> bool:
-        """Check if there is a winner and end the game."""
+        """
+        Check if there is a winner and end the game. \n
+        then returns a bool if the game has ended or not
+        """
         if self.left_score >= self.max_points:
             self.game_over(self.left_player_name)
             return True
@@ -65,7 +69,7 @@ class Scoreboard(Turtle):
         """If a player win or lose a game so will it display the winner and also a 'GAME OVER' in the screen
 
         Args:
-            player (str): Name of the player they are hardocoded
+            player (str): name of the player that wins
         """
         self.clear()
         self.goto(0, 0)
